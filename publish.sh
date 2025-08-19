@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LO_VERSION=6.4.0.1
+LO_VERSION=7.6.7.2
 
 aws s3 cp \
   /home/circleci/project/"$LAYER_FILENAME" \

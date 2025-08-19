@@ -30,7 +30,7 @@ If you don't use [aws-lambda-libreoffice npm package](https://github.com/shelfio
 2. Unpack `/opt/lo.tar.br` or `/opt/lo.tar.gz` file during Lambda execution into `/tmp` folder which has 512 MB of free space. Make sure to do this OUTSIDE function handler code.
    This is an expensive task, so better to make it once on a warm start.
 3. LibreOffice binary will be located available at `/opt/instdir/program/soffice.bin`
-4. Check out `/test/index.js` for CLI arguments needed to run LibreOffice to convert a `.txt` file to `.pdf` for more details
+4. Check out `/test/index.mjs` for CLI arguments needed to run LibreOffice to convert a `.txt` file to `.pdf` for more details
 
 ## Version ARNs
 

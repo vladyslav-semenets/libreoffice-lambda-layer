@@ -1,0 +1,24 @@
+FROM --platform=linux/amd64 public.ecr.aws/lambda/nodejs:22
+
+RUN dnf update -y && dnf install -y tar zip brotli
+
+WORKDIR /opt
+
+COPY layer.zip /opt/layer.zip
+
+RUN unzip /opt/layer.zip -d /opt/
+RUN brotli -d lo.tar.br && tar -xvf lo.tar
+
+COPY test/. /var/task/
+
+WORKDIR /var/task
+
+ENV LD_LIBRARY_PATH="/opt/libreoffice/program:/var/lang/lib:/lib64:/usr/lib64:/opt/runtime-libs:$LD_LIBRARY_PATH"
+ENV URE_BOOTSTRAP="vnd.sun.star.pathname:/opt/libreoffice/program/fundamentalrc"
+ENV HOME=/tmp
+ENV FONTCONFIG_PATH="/var/task/fonts"
+ENV TMPDIR=/tmp
+
+USER nobody
+
+CMD ["index.handler"]
